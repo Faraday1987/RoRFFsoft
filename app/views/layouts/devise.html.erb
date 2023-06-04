@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%= render 'shared/head'%>
+  </head>
+  <body class="bg-gradient-primary">
+    <div class="container">
+      <!-- Outer Row -->
+      <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+          <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+              <!-- Nested Row within Card Body -->
+              <div class="row">
+                <div class="col-lg-6 d-none d-lg-block bg-login-img"></div>
+                <div class="col-lg-6">
+                  <div class="p-5">
+                    <div class="text-center">
+                      <h1 class="d-flex align-items-center justify-content-left text-gray-900 mb-4">
+                        <div class="rotate-n-15">
+                          <i class="fa-brands fa-phoenix-framework fa-lg"></i>
+                        </div>
+                        <div class="sidebar-brand-text m-3">FFSoft <sup><small>1.0</small></sup></div>
+                      </h1>
+                      <hr>
+                    </div>
+                    <%= yield%>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

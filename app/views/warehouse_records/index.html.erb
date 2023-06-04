@@ -1,0 +1,72 @@
+ <!-- Default Card Example -->
+<div class="card mb-4">
+  <div class="card-body">
+      <%= link_to new_warehouse_record_path, {class: "btn btn-info", id: "registrar-entrada-btn"}  do %>
+        <span class="fas fa-plus-square"> </span>
+        Registrar entrada
+    <%end%>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 text-dark">Reistros de Almacen</h6>
+      </div>
+      <div class="card-body">
+        <div id="tablaCategorias" class="table-responsive">
+          <table class="table" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>user_id</th>
+                <th>supplier</th>
+                <th>product</th>
+                <th>cantidad</th>
+                <th>disponible</th>
+                <th>weight</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>Fecha</th>
+                <th>user_id</th>
+                <th>supplier</th>
+                <th>product</th>
+                <th>cantidad</th>
+                <th>disponible</th>
+                <th>weight</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              <% @records.each do |wrh| %>
+                <tr id="#_<%=sale.id%>">
+                  <td>
+                    <%=sale.created_at%>
+                  </td>
+                  <td>
+                    <%=sale.user_id%>
+                  </td>
+                  <td>
+                    <%=sale.supplier%>
+                  </td>
+                  <td>
+                    <%=sale.product%>
+                  </td>
+                  <td>
+                    <%=sale.cantidad%>
+                  </td>
+                  <td>
+                    <%=sale.disponible%>
+                  </td>
+                  <td>
+                    <%=sale.weight%>
+                  </td>
+                </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

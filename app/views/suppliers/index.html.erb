@@ -1,0 +1,86 @@
+ <!-- Default Card Example -->
+<div class="card mb-4">
+  <div class="card-body">
+    <div>
+      <%= link_to new_supplier_path, { class: "btn btn-light btn-sm btn-icon-split", id: "anadir-categoria-btn"}  do %>
+        <span class="icon text-white-50">
+          <i class="fas fa-plus fa-fw"></i>
+        </span>
+        <span class="text"> Nuevo Proveedor </span>
+      <% end %>
+    </div>
+    <br />
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 text-dark">Proveedores</h6>
+      </div>
+      <div class="card-body">
+        <div id="tablaSuppliers" class="table-responsive">
+          <table class="table" id="dataTable" width="80%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th></th>
+                <th>Empresa</th>
+                <th>Dirección</th>
+                <th>CP</th>
+                <th>Ciudad</th>
+                <th>Contacto</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @proveedores.each do |sp| %>
+                <tr id="#sp_<%=sp.id%>">
+                  <td>
+                    <%=sp.id%>
+                  </td>
+                  <td>
+                    <div class="media">
+                      <%= image_tag(valid_image_url?(sp.imageurl) ? sp.imageurl : 'no-image.png', alt: 'img', class: 'brand-image', width: 42, height: 42) %>
+                    </div>
+                  </td>
+                  <td>
+                    <%=sp.company_name%>
+                  </td>
+                  <td>
+                    <%=sp.address%>
+                  </td>
+                  <td>
+                    <%=sp.cp%>
+                  </td>
+                  <td>
+                    <%=sp.city%>
+                  </td>
+                  <td>
+                    <%=sp.contact_name%>
+                  </td>
+                  <td>
+                    <%=sp.email%>
+                  </td>
+                  <td>
+                    <%=sp.phone%>
+                  </td>
+                  <td>
+                    <%= link_to(edit_supplier_path(sp.id), class: "btn btn-outline-dark btn-sm") do %>
+                      <i class="fas fa-edit"></i>
+                    <% end %>
+                    <%= link_to(supplier_path(sp), data: {
+                        turbo_method: :delete, 
+                        turbo_confirm: 'Seguro de eliminar?' 
+                        }, class: "btn btn-outline-danger btn-sm") do %>
+                      <i class="fas fa-trash"></i>
+                    <% end %>
+                  </td>
+                </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+ <!-- Default Card Example -->
+<div class="card mb-4">
+  <div class="card-body">
+    <div>
+
+      <%= link_to new_client_path, { class: "btn btn-light btn-sm btn-icon-split", id: "anadir-categoria-btn"}  do %>
+        <span class="icon text-white-50">
+          <i class="fas fa-plus fa-fw"></i>
+      </span>
+      <span class="text"> Nuevo cliente </span>
+      <% end %>
+
+    </div>
+    <br />
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 text-dark">Clientes</h6>
+      </div>
+      <div class="card-body">
+        <div id="tablaClientes" class="table-responsive compact">
+          <table class="table" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>CP</th>
+                <th>Ciudad</th>
+                <th>Contacto</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @clientes.each do |client| %>
+                <tr id="#_<%=client.id%>">
+                    <td>
+                        <%=client.nombre%>
+                    </td>
+                    <td>
+                    <%=client.address%>
+                    </td>
+                    <td>
+                    <%=client.cp%>
+                    </td>
+                    <td>
+                    <%=client.city%>
+                    </td>
+                    <td>
+                    <%=client.contact_name%>
+                    </td>
+                    <td>
+                    <%=client.email%>
+                    </td>
+                    <td>
+                    <%=client.phone%>
+                    </td>
+                      <td>
+                      <%= link_to(edit_client_path(client.id), class: "btn btn-outline-dark btn-sm") do %>
+                        <i class="fas fa-edit"></i>
+                      <% end %>
+                      <%= link_to(client_path(client), data: {
+                        turbo_method: :delete, 
+                        turbo_confirm: 'Seguro de eliminar?' 
+                        }, class: "btn btn-outline-danger btn-sm") do %>
+                        <i class="fas fa-trash"></i>
+                      <% end %> 
+                  </td>
+                </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

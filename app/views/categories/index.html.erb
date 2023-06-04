@@ -1,0 +1,73 @@
+ <!-- Default Card Example -->
+<div class="card mb-4">
+  <div class="card-body">
+    <div>
+
+
+      <%= link_to new_category_path, { class: "btn btn-light btn-sm btn-icon-split", id: "anadir-categoria-btn"}  do %>
+        <span class="icon text-white-50">
+          <i class="fas fa-plus fa-fw"></i>
+      </span>
+      <span class="text"> Crear nueva categoría</span>
+      <% end %>
+
+
+    </div>
+    <br />
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 text-dark"><%=t('.title')%></h6>
+      </div>
+      <div class="card-body">
+        <div id="tablaCategorias" class="table-responsive">
+          <table class="table" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @categorias.each do |cat| %>
+                <tr id="#_<%=cat.id%>">
+                  <td>
+                    # <%=link_to cat.id, category_path(cat.id)%>
+                  </td>
+                  <td>
+                    <div class="media">
+                      <%= image_tag(valid_image_url?(cat.imageurl) ? cat.imageurl : 'no-image.png', alt: 'img', class: 'brand-image', width: 42, height: 42) %>
+                    </div>
+                  </td>
+                  <td>
+                    <%=cat.nombre%>
+                  </td>
+                  <td>
+                    <%=cat.descripcion%>
+                  </td>
+                  <td>
+                      <%= link_to(category_path(cat), class: "btn btn-outline-dark btn-md") do %>
+                        <i class="fas fa-eye text-red-900"></i>
+                      <% end %>
+                      <%= link_to(edit_category_path(cat.id), class: "btn btn-outline-dark btn-md") do %>
+                        <i class="fas fa-edit"></i>
+                      <% end %>
+                      <%= link_to(category_path(cat), data: {
+                        turbo_method: :delete, 
+                        turbo_confirm: 'Seguro de eliminar?' 
+                        }, class: "btn btn-outline-danger btn-md") do %>
+                        <i class="fas fa-trash"></i>
+                      <% end %> 
+                  </td>
+                </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

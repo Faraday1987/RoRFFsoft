@@ -1,0 +1,92 @@
+<%= form_with model: @proveedor do |f| %>
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 text-darkl">Nuevo Proveedor:</h6>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+          </div>
+          <div class="item form-group<%= @proveedor.errors[:company_name].any? ? ' has-error has-feedback' : '' %>">
+            <%= f.label :company_name, "Empresa: " %>
+            <div class="input-group">
+              <%= f.text_field :company_name, {:class=> "form-control", :placeholder=>"Nombre empresa...",  :required=>true } %>
+              <%if @proveedor.errors[:company_name].any? %>
+                <p class="bg-danger"><%= @proveedor.errors[:company_name].to_s[/\w([^"]*)/] %></p>
+              <% end %>
+            </div>
+          </div>
+          <div class="item form-group<%= @proveedor.errors[:address].any? ? ' has-error has-feedback' : '' %>">
+            <%= f.label :address, "Dirección: " %>
+            <div class="input-group">
+              <%= f.text_field :address, {:class=> "form-control", :placeholder=>"Dirección"} %>
+              <%if @proveedor.errors[:address].any? %>
+                <p class="bg-danger"><%= @proveedor.errors[:address].to_s[/\w([^"]*)/] %></p>
+              <% end %>
+            </div>
+          </div>
+          <div class="item form-group<%= @proveedor.errors[:cp].any? ? ' has-error has-feedback' : '' %>">
+            <%= f.label :cp, "Código Postal: " %>
+            <div class="input-group">
+              <%= f.text_field :cp, {:class=> "form-control", :placeholder=>"C.P."} %>
+              <%if @proveedor.errors[:cp].any? %>
+                <p class="bg-danger"><%= @proveedor.errors[:cp].to_s[/\w([^"]*)/] %></p>
+              <% end %>
+            </div>
+          </div>
+          <div class="item form-group<%= @proveedor.errors[:city].any? ? ' has-error has-feedback' : '' %>">
+            <%= f.label :city, "Ciudad: " %>
+            <div class="input-group">
+              <%= f.text_field :city, {:class=> "form-control", :placeholder=>"Ciudad"} %>
+              <%if @proveedor.errors[:city].any? %>
+                <p class="bg-danger"><%= @proveedor.errors[:city].to_s[/\w([^"]*)/] %></p>
+              <% end %>
+            </div>
+          </div>
+          <div class="item form-group<%= @proveedor.errors[:contact_name].any? ? ' has-error has-feedback' : '' %>">
+            <%= f.label :contact_name, "Nombre contacto: " %>
+            <div class="input-group">
+              <%= f.text_field :contact_name, {class: "form-control", :placeholder=>"Nombre contacto", :required=>true } %>
+              <%if @proveedor.errors[:contact_name].any? %>
+                <p class="bg-danger"><%= @proveedor.errors[:contact_name].to_s[/\w([^"]*)/] %></p>
+              <% end %>
+            </div>
+          </div>
+          <div class="item form-group<%= @proveedor.errors[:email].any? ? ' has-error has-feedback' : '' %>">
+            <%= f.label :email, "Correo electrónico: " %>
+            <div class="input-group">
+              <%= f.text_field :email, {:class=> "form-control", :placeholder=>"Correo"} %>
+              <%if @proveedor.errors[:email].any? %>
+                <p class="bg-danger"><%= @proveedor.errors[:email].to_s[/\w([^"]*)/] %></p>
+              <% end %>
+            </div>
+          </div>
+          <div class="item form-group<%= @proveedor.errors[:phone].any? ? ' has-error has-feedback' : '' %>">
+            <%= f.label :phone, "Teléfono: " %>
+            <div class="input-group">
+              <%= f.text_field :phone, {:class=> "form-control", :placeholder=>"Teléfono"} %>
+              <%if @proveedor.errors[:phone].any? %>
+                <p class="bg-danger"><%= @proveedor.errors[:phone].to_s[/\w([^"]*)/] %></p>
+              <% end %>
+            </div>
+          </div>
+          <div class="item form-group<%= @proveedor.errors[:imageurl].any? ? ' has-error has-feedback' : '' %>">
+            <%= f.label :imageurl, "Imagen logo URL: " %>
+            <div class="input-group">
+              <%= f.text_field :imageurl, {:class=> "form-control", :placeholder=>"Logo imagen url..." } %>
+              <%if @proveedor.errors[:imageurl].any? %>
+                <p class="bg-danger"><%= @proveedor.errors[:imageurl].to_s[/\w([^"]*)/] %></p>
+              <% end %>
+            </div>
+          </div>
+          <div class="actions col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+            <%= f.submit @proveedor.new_record? ? "Crear Proveedor" : "Actualizar Proveedor", :class => "btn btn-success mr-3"%>
+            <%=link_to "Regresar", suppliers_path, html_options = { class: 'btn btn-link btn-sm mr-3'}%>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

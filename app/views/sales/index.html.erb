@@ -1,0 +1,68 @@
+ <!-- Default Card Example -->
+<div class="card mb-4">
+  <div class="card-body">
+    <div>
+      <%= link_to new_sale_path, { class: "btn btn-light btn-sm btn-icon-split", id: "anadir-categoria-btn"}  do %>
+        <span class="icon text-white-50">
+          <i class="fas fa-plus fa-fw"></i>
+      </span>
+      <span class="text"> Crear Venta </span>
+      <% end %>
+
+    </div>
+    <br />
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 text-dark">Ventas</h6>
+      </div>
+      <div class="card-body">
+        <div id="tablaCategorias" class="table-responsive">
+          <table class="table" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Importe</th>
+                <th>Monto</th>
+                <th>Fecha</th>
+                <th>Peso</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @ventas.each do |sale| %>
+                <tr id="#_<%=sale.id%>">
+                  <td>
+                    Folio # <%=link_to sale.id, sales_path(sale.id)%>
+                  </td>
+                  <td>
+                    <%=sale.importe%>
+                  </td>
+                  <td>
+                    <%=sale.amount%>
+                  </td>
+                  <td>
+                    <%=sale.created_at.strftime("%d-%m-%Y")%>
+                  </td>
+                  <td>
+                    <%=sale.weight%>
+                  </td>
+                  <td>
+                      <%= link_to(edit_sale_path(sale.id), class: "btn btn-outline-primary btn-sm") do %>
+                        <i class="fas fa-eye text-red-900"></i>
+                      <% end %>
+                      <%= link_to(sale_path(sale.id), data: {
+                        turbo_method: :delete,
+                        }, class: "btn btn-outline-danger btn-sm") do %>
+                        <i class="fas fa-trash"></i>
+                      <% end %> 
+                  </td>
+                </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sku: MyString
+  nombre: MyString
+  description: MyText
+  images: MyText
+  imagen: MyString
+  oldprpriceice: 9.99
+  oldprice: 9.99
+  realprice: 9.99
+  warehouse: MyString
+  is_active: false
+  existencekg: 9.99
+  existence: 1
+  weight: 9.99
+  category_id: 1
+  supplier_id: 1
+  commission_for_sale: 9.99
+  commission_amount: 9.99
+  categories: one
+  suppliers: one
+
+two:
+  sku: MyString
+  nombre: MyString
+  description: MyText
+  images: MyText
+  imagen: MyString
+  oldprpriceice: 9.99
+  oldprice: 9.99
+  realprice: 9.99
+  warehouse: MyString
+  is_active: false
+  existencekg: 9.99
+  existence: 1
+  weight: 9.99
+  category_id: 1
+  supplier_id: 1
+  commission_for_sale: 9.99
+  commission_amount: 9.99
+  categories: two
+  suppliers: two

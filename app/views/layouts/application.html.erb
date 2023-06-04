@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render 'shared/head'%>
+  </head>
+  <body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+      <%= render 'base/sidebar' %>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <%= render 'base/header' %>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                      <%= yield %>
+                </div>
+                <!-- /.container-fluid -->
+            
+            </div>
+            <!-- End of Main Content -->
+            <%= render 'base/footer'%>
+        </div>
+
+
+        <!-- End of Content Wrapper -->
+        <%= render 'shared/flash'%>
+          <!-- Scroll to Top Button-->
+          <a class="scroll-to-top rounded" href="#page-top">
+              <i class="fas fa-angle-up"></i>
+          </a>
+    </div>
+
+    <!-- End of Page Wrapper -->
+    <script src="<%= asset_path('jquery.min.js') %>"></script>
+    <script src="<%= asset_path('bootstrap.bundle.min.js') %>"></script>
+    <script src="<%= asset_path('jquery.easing.min.js') %>"></script>
+    <script src="<%= asset_path('sb-admin-2.min.js') %>"></script>
+    <script src="<%= asset_path('jquery.dataTables.min.js') %>"></script>
+    <script src="<%= asset_path('dataTables.bootstrap4.min.js') %>"></script>
+    <script src="<%= asset_path('datatables-demo.js') %>"></script>
+    <script src="<%= asset_path('toastr.min.js') %>"></script>
+
+  </body>
+</html>
+

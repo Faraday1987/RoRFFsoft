@@ -1,0 +1,111 @@
+ <!-- Default Card Example -->
+<div class="card mb-4">
+  <div class="card-body">
+    <div>
+      <%= link_to new_product_path, { class: "btn btn-light btn-sm btn-icon-split", id: "anadir-categoria-btn"}  do %>
+        <span class="icon text-white-50">
+          <i class="fas fa-plus fa-fw"></i>
+        </span>
+        <span class="text"> Nuevo producto </span>
+      <% end %>
+    </div>
+    <br />
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 text-dark">Productos</h6>
+      </div>
+      <div class="card-body">
+        <div id="tablaClientes" class="table-responsive compact">
+          <table class="table" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Imagen</th>
+                <th>SKU</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>$</th>
+                <th>$ Mayorista</th>
+                <th>Peso</th>
+                <th>Existencias</th>
+                <th>KG</th>
+                <th>Categoría</th>
+                <th>Proveedor</th>
+                <th>Comision</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @productos.each do |product| %>
+                <tr id="#_<%=product.id%>">
+
+                  <td>
+                    <%=product.id%>
+                  </td>
+                  <td>
+                    <div class="media">
+                      <%= image_tag(valid_image_url?(product.imagen) ? product.imagen : 'no-image.png', alt: 'img', class: 'brand-image', width: 42, height: 42) %>
+                    </div>
+                  </td>
+                  <td>
+                    <%=product.sku%>
+                  </td>
+                  <td>
+                    <%=product.nombre%>
+                  </td>
+                  <td>
+                    <%=product.description %>
+                  </td>
+                  <td>
+                    $<%=product.oldprice%>
+                  </td>
+                  <td>
+                    $<%=product.realprice%>
+                  </td>
+                  <td>
+                    <%=product.existencekg%>
+                  </td>
+                  <td>
+                    <%=product.existence%>
+                  </td>
+                  <td>
+                    <%=product.weight / 1000 %> kg
+                  </td>
+                  <td>
+                    <% if product.categories_id.present? %>
+                      <%= Category.find(product.categories_id).nombre %>
+                    <% else %>
+                      N/A
+                    <% end %>
+                  </td>
+                  <td>
+                    <% if product.suppliers_id.present? %>
+                      <%= Supplier.find(product.suppliers_id).company_name %>
+                    <% else %>
+                      N/A
+                    <% end %>
+                  </td>
+                  <td>
+                    $<%=product.commission_for_sale%>
+                  </td>
+                  <td>
+                      <%= link_to(edit_product_path(product), class: "btn btn-outline-dark btn-md") do %>
+                        <i class="fas fa-edit"></i>
+                      <% end %>
+                      <%= link_to(product_path(product.id), data: {
+                        turbo_method: :delete, 
+                        turbo_confirm: 'Seguro de eliminar?' 
+                        }, class: "btn btn-outline-danger btn-md") do %>
+                        <i class="fas fa-trash"></i>
+                      <% end %> 
+                  </td>
+                </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

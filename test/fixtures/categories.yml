@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: Plastico
+  descripcion: Descripción de prueba
+  imageurl: 
+
+two:
+  nombre: Aluminio
+  descripcion: Descripcion de aluminio
+  imageurl: https://res.cloudinary.com/ffdelivery/image/upload/v1684781779/logosample_evmw6j.png

@@ -1,0 +1,152 @@
+<%= form_with model: @producto do |f| %>
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Nuevo Producto</h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="item form-group<%= @producto.errors[:nombre].any? ? ' has-error has-feedback' : '' %>">
+                  <%= f.label :nombre, "Nombre: " %>
+                  <div class="input-group">
+                    <%= f.text_field :nombre, {:class=> "form-control", :placeholder=>"nombre...",  :required=>true } %>
+                    <%if @producto.errors[:nombre].any? %>
+                      <p class="bg-danger"><%= @producto.errors[:nombre].to_s[/\w([^"]*)/] %></p>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="item form-group<%= @producto.errors[:description].any? ? ' has-error has-feedback' : '' %>">
+                  <%= f.label :description, "Descripción producto: " %>
+                  <div class="input-group">
+                    <%= f.text_area :description, {class: "form-control", :placeholder=>"Descripción de producto...", :required=>true } %>
+                    <%if @producto.errors[:description].any? %>
+                      <p class="bg-danger"><%= @producto.errors[:description].to_s[/\w([^"]*)/] %></p>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="item form-group<%= @producto.errors[:category_id].any? ? ' has-error has-feedback' : '' %>">
+                  <%= f.label :categorias, "Categoría: " %>
+                  <% if @categorias.present? %>
+                    <div class="input-group">
+                      <%= f.collection_select(:categories_id, @categorias, :id, :nombre, { prompt: 'Seleccione categoría' }, { class: "form-control" }) %>
+                    </div>
+                  <% else %>
+                    <p>No se encontraron categorías.</p>
+                  <% end %>
+                </div>
+                <div class="item form-group<%= @producto.errors[:supplier_id].any? ? ' has-error has-feedback' : '' %>">
+                  <%= f.label :proveedores, "Proveedor: " %>
+                  <% if @proveedores.present? %>
+                    <div class="input-group">
+                      <%= f.collection_select(:suppliers_id, @proveedores, :id, :company_name, { prompt: 'Seleccione Proveedor' }, { class: "form-control" }) %>
+                    </div>
+                  <% else %>
+                    <p>No se encontraron proveedores.</p>
+                  <% end %>
+                </div>
+              
+                <div class="item form-group<%= @producto.errors[:imagen].any? ? ' has-error has-feedback' : '' %>">
+                  <%= f.label :imagen, "Imagen de Producto: " %>
+                  <div class="input-group">
+                    <%= f.text_field :imagen, {:class=> "form-control", :placeholder=>"Opcional url de imagen..." } %>
+                    <%if @producto.errors[:imagen].any? %>
+                      <p class="bg-danger"><%= @producto.errors[:imagen].to_s[/\w([^"]*)/] %></p>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="item form-group<%= @producto.errors[:sku].any? ? ' has-error has-feedback' : '' %>">
+                  <%= f.label :sku, "Código / SKU: " %>
+                  <div class="input-group">
+                    <%= f.text_field :sku, {class: "form-control", :placeholder=>"Código..."} %>
+                    <%if @producto.errors[:sku].any? %>
+                      <p class="bg-danger"><%= @producto.errors[:sku].to_s[/\w([^"]*)/] %></p>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="item form-group<%= @producto.errors[:oldprice].any? ? ' has-error has-feedback' : '' %>">
+                  <%= f.label :oldprice, "Precio alto: " %>
+                  <div class="input-group">
+                    <%= f.text_field :oldprice, {class: "form-control", :placeholder=>"Decimal-Precio sin descuento..."} %>
+                    <%if @producto.errors[:oldprice].any? %>
+                      <p class="bg-danger"><%= @producto.errors[:oldprice].to_s[/\w([^"]*)/] %></p>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="item form-group<%= @producto.errors[:realprice].any? ? ' has-error has-feedback' : '' %>">
+                  <%= f.label :realprice, "Precio real: " %>
+                  <div class="input-group">
+                    <%= f.text_field :realprice, {class: "form-control", :placeholder=>"Decimal-Precio venta"} %>
+                    <%if @producto.errors[:realprice].any? %>
+                      <p class="bg-danger"><%= @producto.errors[:realprice].to_s[/\w([^"]*)/] %></p>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="item form-group<%= @producto.errors[:weight].any? ? ' has-error has-feedback' : '' %>">
+                  <%= f.label :weight, "Peso: " %>
+                  <div class="input-group">
+                    <%= f.text_field :weight, {class: "form-control", :placeholder=>"Decimal-Peso weight"} %>
+                    <%if @producto.errors[:weight].any? %>
+                      <p class="bg-danger"><%= @producto.errors[:weight].to_s[/\w([^"]*)/].to_d %></p>
+                    <% end %>
+                  </div>
+                </div>
+
+            </div>
+
+              <div class="col-md-6">
+                <div class="item form-group<%= @producto.errors[:existencekg].any? ? ' has-error has-feedback' : '' %>">
+                  <%= f.label :existencekg, "Peso en g/kg / 1000: " %>
+                  <div class="input-group">
+                    <%= f.text_field :existencekg, {class: "form-control", :placeholder=>"Decimal-Peso en gramos"} %>
+                    <%if @producto.errors[:existencekg].any? %>
+                      <p class="bg-danger"><%= @producto.errors[:existencekg].to_s[/\w([^"]*)/] %></p>
+                    <% end %>
+                  </div>
+                  <div class="item form-group<%= @producto.errors[:existence].any? ? ' has-error has-feedback' : '' %>">
+                    <%= f.label :existence, "Cantidad: " %>
+                    <div class="input-group">
+                      <%= f.text_field :existence, {class: "form-control", :placeholder=>"Entero-Cantidad"} %>
+                      <%if @producto.errors[:existence].any? %>
+                        <p class="bg-danger"><%= @producto.errors[:existence].to_s[/\w([^"]*)/] %></p>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="item form-group<%= @producto.errors[:commission_for_sale].any? ? ' has-error has-feedback' : '' %>">
+                    <%= f.label :commission_for_sale, "Comision por venta: " %>
+                    <div class="input-group">
+                      <%= f.text_field :commission_for_sale, {class: "form-control", :placeholder=>"decimal-Tiene comision de venta."} %>
+                      <%if @producto.errors[:commission_for_sale].any? %>
+                        <p class="bg-danger"><%= @producto.errors[:commission_for_sale].to_s[/\w([^"]*)/] %></p>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="item form-group<%= @producto.errors[:commission_amount].any? ? ' has-error has-feedback' : '' %>">
+                    <%= f.label :commission_amount, "Comision $: " %>
+                    <div class="input-group">
+                      <%= f.text_field :commission_amount, {class: "form-control", :placeholder=>"decimal-Monto de comision por venta"} %>
+                      <%if @producto.errors[:commission_amount].any? %>
+                        <p class="bg-danger"><%= @producto.errors[:commission_amount].to_s[/\w([^"]*)/] %></p>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+          </div>
+          <!-- /.card -->
+        </div>
+        <div class="actions col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+          <%= f.submit @producto.new_record? ? "Agregar producto" : "Actualizar producto", :class => "btn btn-success mr-3"%>
+          <%=link_to "Regresar", products_path, html_options = { class: 'btn btn-link btn-sm mr-3'}%>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  <% end %>

@@ -1,0 +1,11 @@
+.bg-login-img {
+  background: url("https://res.cloudinary.com/ffdelivery/image/upload/c_fit,h_640,w_447/v1684617147/admin_one_v5m69h.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.bg-logo-img {
+  background: url("https://res.cloudinary.com/ffdelivery/image/upload/v1684610891/home_login_j6wlra.jpg");
+  background-position: center;
+  background-size: cover;
+}

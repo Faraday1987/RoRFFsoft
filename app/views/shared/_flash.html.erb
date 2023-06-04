@@ -1,0 +1,22 @@
+<% if flash.present? %>
+  <% flash.each do |key, value| %>
+    <% if key == 'notice' %>
+      <% content_for :toasts_js do %>
+          toastr["success"]("<%= j value %>")
+      <% end %>
+    <% elsif key == 'alert' %>
+      <% content_for :toasts_js do %>
+          toastr["error"]("<%= j value %>")
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<script>
+  <%= yield :toasts_js %>
+</script>
+
+
+
+
+

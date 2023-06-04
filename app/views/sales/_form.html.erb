@@ -1,0 +1,226 @@
+<%= form_with(model: @venta, url: edit_sale_path) do |f| %>
+  <div class="row">
+    <!-- Area search -->
+    <div class="col-xl-9 col-lg-8">
+      <div class="card shadow mb-4">
+        <!-- Card Header  -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="pt-2 pb-2">
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 align-items-center justify-content-center">
+                <%= form_with url: edit_sale_path, method: :get do |form| %>
+                <% end %>
+                <%= form_with url: edit_sale_path, method: :get do |form| %>
+                  <div class="item form-group">
+                    <div class="input-group">
+                      <%= form.text_field :query_text, value: params[:query_text], placeholder: 'Buscar Producto', onChange: 'this.form.requestSubmit()', class: 'form-control', type: :search %>
+                    </div>
+                    <%# <%= form.submit 'Buscar', class: 'btn btn-primary' %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="col-xl-2 col-lg-2">
+              </div>
+            </div>
+            <div id="tablaClientes" class="table-responsive compact">
+              <turbo-frame id="products">
+                <table class="table" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Imagen</th>
+                      <th>Nombre</th>
+                      <th>Descripción</th>
+                      <th>Disponibles</th>
+                      <th>$</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% if @resultados.present? %>
+                      <% @resultados.each do |product| %>
+                        <tr id="<%= product.id %>">
+                          <td>
+                            <div class="media">
+                              <%= image_tag(valid_image_url?(product.imagen) ? product.imagen : 'no-image.png', alt: 'img', class: 'brand-image', width: 42, height: 42) %>
+                            </div>
+                          </td>
+                          <td>
+                            <%= product.nombre %>
+                          </td>
+                          <td>
+                            <%= product.description %>
+                          </td>
+                          <td>
+                            <%= product.existence %>
+                          </td>
+                          <td>
+                            $<%= product.realprice %>
+                          </td>
+                          <td>
+                            <%= form_with url: add_item_venta_path(@venta.id), method: :post, data: { turbo_frame: 'frame_id' }, class: 'd-flex flex-row ' do |form| %>
+                              <%= form.hidden_field :id, value: @venta.id %>
+                              <%= form.hidden_field :product_id, value: product.id %>
+                              <%= form.number_field :cantidad, value: 1, min: 1, class: 'form-control form-control-sm'%>
+                              <%= form.submit 'Agregar', class: 'btn btn-outline-info btn-sm' %>
+                            <% end %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    <% else %>
+                      <tr>
+                        <td colspan="12">Resultados de la búsqueda</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </turbo-frame>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-4">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Notas</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="item form-group">
+            <div class="input-group">
+              <%= f.text_area :search_products, {:class=> "form-control", :placeholder=>"Agregar notas" } %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Cliente</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="item form-group">
+            <div class="input-group">
+              <%= f.text_field :search_client, {:class=> "form-control", :placeholder=>"Buscar Cliente" } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-9 col-lg-8">
+      <div class="card">
+        <div class="card-header ">
+          <div class="row">
+            <div class="col-md-6">
+              <h6 class="m-0 text-darkl">Pedido: <%= @venta.id%></h6>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered" width="80%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Product</th>
+                  <th>Image</th>
+                  <th>Nombre</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if @productos_venta.empty? %>
+                  <tr>
+                    <td>No hay productos en la venta</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                <% else %>
+                  <% @productos_venta.each do |det| %>
+                    <tr>
+                      <td> <%=det.try(:id)%></td>
+                      <td> Id <%=det.try(:product_id)%></td>
+                      <td>
+                        <div class="media">
+                          <% if det.try(:product_id).present? %>
+                            <%= image_tag(valid_image_url?(Product.find(det.try(:product_id)).imagen) ? Product.find(det.try(:product_id)).imagen : 'no-image.png', alt: 'img', class: 'brand-image', width: 42, height: 42) %>
+                          <% else %>
+                            N/A
+                          <% end %>
+                        </div>
+                      </td>
+                      <td>
+                        <% if det.try(:product_id).present? %>
+                          <%= Product.find(det.try(:product_id)).nombre %>
+                        <% else %>
+                          N/A
+                        <% end %>
+                      </td>
+                      <td> <%=det.try(:cantidad)%></td>
+                      <td>
+                        <% if det.try(:product_id).present? %>
+                          <%= Product.find(det.try(:product_id)).realprice  %>
+                        <% else %>
+                          N/A
+                        <% end %>
+                      </td>
+                      <td>
+                        <% if det.try(:product_id).present? %>
+                          $<%= Product.find(det.try(:product_id)).realprice * det.try(:cantidad).to_d%>
+                        <% else %>
+                          N/A
+                        <% end %>
+                      </td>
+                      <td>
+                        <%= form_with url: remove_item_venta_path(@venta.id), method: :post, data: { turbo_frame: 'frame_id' } do |form| %>
+                          <%= form.hidden_field :id, value: @venta.id%>
+                          <%= form.hidden_field :item_detail_id, value: det.try(:id)%>
+                          <%= form.hidden_field :product_id, value: det.try(:product_id) %>
+                          <%= form.hidden_field :cantidad, value: det.try(:cantidad) %>
+                          <%= form.submit 'X', class: 'btn btn-outline-info btn-sm' %>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="actions col-md-12 col-sm-9 col-xs-12 col-md-offset-3">
+            <%=link_to "Crear pedido", sales_path, html_options = { class: 'btn btn-success mr-3'}%>
+            <%# <%= f.submit @venta.new_record? ? "Crear Venta" : "Actualizar Venta", :class => "btn btn-success mr-3"%>
+            <%= link_to(sale_path(@venta.id), data: {
+                        turbo_method: :delete,
+                        }, class: "btn btn-outline-danger btn-sm") do %>
+              Cancelar venta
+            <% end %>
+          </div>
+        </div>
+        <div class="card-footer">
+          <h2 id="importe_venta_lbl" class="float-right">Importe Total $ <%= @venta.importe.round(2) %> </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
